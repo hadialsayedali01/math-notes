@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Math Notes</title>
+    <link rel="stylesheet" href="math.css">
+  <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+
+<script type="text/javascript" async
+  src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+<script type="text/javascript" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  </head>
+<body>
+
+<h1> Appendix A: Mathematical Induction </h2>
+<h2> Introduction (feel free to skip to example)</h2>
+<p>
+Sherlock Holmes's reasoning is often referred to erroneously (even by himself) as "deductive" reasoning. Deductive reasoning begins with large-scale or general observations and arrives at small-scale or specific conclusions. Contrastingly, Sherlock Holmes often begins with small, minute observations that won't be picked up by the average person, and he later reaches comprehensive, large-scale conclusions. This is inductive reasoning: the use of specific instances to draw, or in this case, prove general princples. 
+</p><p>
+In math, we can prove statements by showing that they're true for some specific instances, and then propogating the truth of those instances to the general case. This is called proof by mathematical introduction.
+</p><p>
+Consider a statement we want to prove and denote it by $P(n)$. We start by proving the base case of the statement: showing that the most basic instance of the statement, $P(n_{0})$, is true. Our inductive hypothesis then becomes
+$$\text{If $P(n)$ is true, then $P(n+1)$ is true}$$
+$$\text{or}$$
+$$P(n)\implies P(n+1)$$
+$$\text{or}$$
+$$\text{"If the statement is true for one number, then the statement is true for the next number"}$$
+By proving this statement (any of the above forms of it), we successfully generalize the veracity of the specific base case to every possible case, thus proving the statement. 
+</p><p>
+<strong>For a sequence of dominoes to fall, you need two guarantees: (1) the very first domino will fall and (2) if a domino falls, then the one immediately after it will fall too.</strong>
+</p>
+<h2> Example </h2>
+<p> Say we want to prove the following statement: </p>
+$$P(n):= 1 + 2 + 3 + \dotsc + n = \frac{n(n+1)}{2},\text{ for a natural number $n$.}$$
+We do this by mathematical induction. 
+</p><p>
+What's the base case? The smallest natural number is $1$, so we test the veracity of the statement $P(1)$ first:</p>
+$$P(1)=1\text{, and}$$
+$$\frac{1(1+1)}{2}=1,$$
+so the statement is true for the base case $P(1)$. The induction hypothesis is
+$$\text{If $P(a)$ is true for some natural number $a$, then $P(a+1)$ is true}.$$
+With this hypothesis, we can safely assume that $P(a)$ is true; that is, we have the equation $$1+2+3+\dotsc+a=\frac{a(a+1)}{2}$$ in our arsenal, and we will use it to prove $P(a+1)$ is true.
+</p><p>
+Let's start by looking at the left-hand side of the equality $P(a+1)$ poses. It's $$\begin{aligned}
+&1+2+3+\dotsc+a+1\\
+&=(1+2+3+\dotsc+a)+1\\
+&=\frac{a(a+1)}{2}+1\\
+&=\frac{a(a+1)}{2}+1\\
+&=\frac{a^{2}+3a+2}{2}\\
+\end{aligned}$$.
+</p><p>
+Now let's look at the right-hand side of the equality $P(a+1)$ poses. It's 
+$$\begin{aligned}&\frac{(a+1)(a+2)}{2}\\&=\frac{a^{2}+3a+2}{2}\\&\end{aligned}$$
+which equals the left side we evaluated in the previous step. 
+</p><p>We've shown that $P(1)$ is true (the first domino falls) and $P(n)\implies P(n+1)$ (if a domino falls, then the one immediately after it falls too). Therefore the statement $P(n)$ is true (all the dominoes fall).
+
+</body>
+</html>

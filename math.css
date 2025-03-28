@@ -14,9 +14,16 @@ h2 {
 }
 
 p { 
-	margin-top: 2px;
+	margin-top: 10px;
 }
 
-li {
-	margin-top: 8px;
+p + ul, p + ol {
+    margin-top: -10px;
+}
+
+li { margin-top: 5px;}
+
+
+p + br {
+	margin: 10px 0;
 }

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HTML 5 Boilerplate</title>
+    <title>Math Notes</title>
     <link rel="stylesheet" href="math.css">
   <script>
 window.MathJax = {
@@ -25,9 +25,9 @@ window.MathJax = {
     <h1> Part 1: (Dividing) Integers </h1>
     <h2> 1.0: Defining Integers </h2>
     <p>
-	The set of integers is \(\mathbb{Z}=\{...,-2,-1,0,1,2,...\}\).
+	The set of integers is $\mathbb{Z}=\{...,-2,-1,0,1,2,...\}.$
 	</p><p>
-	The set of natural numbers is \(\mathbb{N}=\{0,1,2,...\}\).
+	The set of natural numbers is $\mathbb{N}=\{1,2,3,...\}.$
 	</p><p>
 	The set of natural numbers is a subset</strong> of the set of integers. This can be represented in several ways: 
 	<ul>
@@ -35,7 +35,6 @@ window.MathJax = {
 		<li> \(x\in\mathbb{N}\implies x\in\mathbb{Z}\) </li>
 		<li> For all \(x\in\mathbb{N}\), we have \(x\in\mathbb{Z}\)
 	</ul>
-	<p>
 	We can add and multiply numbers in both \(\mathbb{Z}\) and \(\mathbb{N}\). Note that subtraction is just adding a negative number.
 	</p><p>
 	Here are some properties of addition \((+)\) and multiplication \((\cdot)\) in \(\mathbb{Z}\) and \(\mathbb{N}\):
@@ -78,7 +77,7 @@ With this definition, $|3|=3$ and $|-2|=2$, as we would expect.
 	<ul><li>We can further this inference: for integers $a,b$, we have $|ab|\geq\max(\{a,b\})$. The absolute value of the product of two integers is usually greater than the individual value of either of those two integers.</li></ul>
 	</p><p>
 	With these tools, we can move on to divisibility.</p>
-   <h2> 1.1: Dividing Integers </h2>
+   <h2> 1.1: Divisibility of Integers </h2>
    <p> We begin with the definition of divisibility.</p>
 	</p><p>
 	<strong>Definition of divisibility: </strong> Let $a,b\in\mathbb{Z}$. We say $a$ divides $b$ if there exists an integer $c$ such that $ac=b$.</p>
@@ -100,14 +99,14 @@ With this definition, $|3|=3$ and $|-2|=2$, as we would expect.
 	<strong>Proofs:</strong>
 	<ol>
 	<li> 
-		Since $uv=1$, we trivially have $|ab|=1$ as well. 
+		Since $ab=1$, we trivially have $|ab|=1$ as well. 
 		<br>Recall that $|ab|=1\leq\max(\{a,b\})$.
 		<br>Without loss of generality, assume $\max(\{a,b\})=a$. Then $a=1$ and therefore $b=1$ as well.
 	</li>
 	<li>
 		From the assumptions, we have $a=bc$ and $b=ak$ for some integers $c,k$.<br>
 		Combine the above two equations. We get $a=bc=(ak)c$, so $a=a(kc)$. This implies that $kc=1$.<br>
-		$kc=1$ implies $k=c=1$ or $k=c=-1$. If the former is true, $a=b$. If the latter is true, $a=-b$.
+		$kc=1$ implies $k=c=1$ or $k=c=-1$. <br>If the former is true, $a=b$. If the latter is true, $a=-b$.
 	</li>	
 	<li>From the assumptions, we have $a=bm$ and $b=cn$ for some integers $m$ and $n$.<br>
 		Combine the above two equations. $a=bm=(cn)m$, so $a=c(nm)$. <br>
@@ -118,6 +117,33 @@ With this definition, $|3|=3$ and $|-2|=2$, as we would expect.
 	$a$ can divide itself again. $a|2a$.<br>
 	From the first line of this proof, $a=bm=cn$, so $a+a=bm+cn=2a.$<br>
 	Since $a$ can divide $2a$, we also have $a$ can divide $bm+cn$.
+	</p>
+	</ol>
+	<p>
+	We now move to prime numbers.
+	</p>	
+	<h2> 1.2: Prime Numbers </h2>
+	<p> <Strong> Definition of prime number:</strong> a natural number $p$ is prime if it can be divided only by itself and 1.</p>
+	<ul>
+		<li>The set of prime numbers is a subset of the natural numbers.</li>
+		<li>The only even prime number is 2. All other even numbers are divisible by 2 and are hence not prime.</li>
+	</ul>
+	<p>
+	There is an important characteristic of natural numbers: every natural number greater than 1 can be written as a product of prime numbers.
+	<ul><li>This prime factorization is unique (independently of the order it presents the prime numbers in).</li>
+	<li>This means we can write, for all natural numbers $n$, $$n=p_{0}\cdot\cdot\cdot p_{k},$$ where each $p_{i}$ is a prime number.</li>
+	<li><strong>Proof (without uniqueness)</strong>: We do this proof by <a href="./Appendix.html">mathematical induction</a>. <br>The <u>base case</u> is done with the smallest prime number, $n=2$. Since $n=2$ is prime, we have trivially found a prime factorization for $2$ and proven the base case. 
+	<br>For the <u>induction step</u>, consider a natural number $m$. Assume that all natural numbers $n< m$ have a prime factorization (we are generalizing the base case).
+	<br>Given this assumption, we now prove that $m$ has a prime factorization. 
+	<br> We consider two cases: if $m$ is prime and if $m$ is not prime.
+	<br> If the former is true, then we have proven the statement trivially.
+	<br> If the latter is true, then $m$ can be written as $m=ab$ for $a,b$ natural numbers nonprime. 
+	<br> Both $a$ and $b$ must be less than $m$. Since we assumed all natural numbers less than $m$ have a prime factorization, $a$ and $b$ have respective prime factorizations:
+	$$a=a_{0}\cdot\cdot\cdot a_{k}\text{ and } b=b_{0}\cdot\cdot\cdot b_{j},$$
+	where all $a_{i}$ and $b_{j}$ are prime numbers. Now we can write
+	$$ m = ab = (a_{0}\cdot\cdot\cdot a_{k})(b=b_{0}\cdot\cdot\cdot b_{j}),$$
+	which is a prime factorization for $m$.
+</ul>
 	</p>
   </body>
   
