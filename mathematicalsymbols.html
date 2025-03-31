@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Math Notes</title>
+    <link rel="stylesheet" href="math.css">
+  <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+
+<script type="text/javascript" async
+  src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+<script type="text/javascript" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  </head>
+<body>
+
+<h1> Appendix A: Symbols of Mathematical Logic </h1>
+<h2> Introduction </h2>
+<p> Consider the statement "For each human, there exists a friend." </p>
+</p><p>
+We begin the translation of this statement into mathematically meaningful symbols.
+</p><p>
+Denote the set of humans by $H$ and the set of friends by $F$. A single human in the set of humans is represented by $h\in H$ ("$h$ in $H$").
+</p><p>
+Similarly, $f\in F$ means "a friend in the set of friends." Now our statement becomes
+</p><p>
+<center>"For each $H$, there exists a $F$."</center>
+</p><p>
+Now we use the "upside-down A" symbol $\forall$ to represent the phrase "for each" (typically read as "for all" though).
+</p><p>
+<center>"$\forall h\in H$ , there exists a $f$ in $F$."</center>
+</p><p>
+Now we use the symbol $\exists$ to represent the phrase "there exists." If every human has a <i>unique</i> friend, we write $\exists!$. 
+</p><p>
+<center>$\forall h\in H\text{, }\exists f\in F$</center>
+</p><p>
+If there's some property that $h$ and $f$ satisfy when put together, we put a colon after the statement and follow it by the property. Say, for example, that combining a human and their friend somehow gives the number $10$.
+</p><p>
+<center>$\forall h\in H\text{, }\exists f\in F: h+f=10$</center>
+<h2> Examples </h2>
+<ol>
+</body>
+</html>

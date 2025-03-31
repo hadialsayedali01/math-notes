@@ -1,5 +1,7 @@
 body {
-	font-size: bigger;
+	font-size: 1.5em;
+	padding: 10px;
+	background-color: #fffef3;
 }
 
 h1 {
@@ -24,6 +26,8 @@ p + ul, p + ol {
 li { margin-top: 5px;}
 
 
-p + br {
+br {
+	display: block;
 	margin: 10px 0;
+	content: " ";
 }
