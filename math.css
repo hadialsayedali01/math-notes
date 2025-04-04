@@ -1,7 +1,7 @@
 body {
 	font-size: 1.5em;
 	padding: 10px;
-	background-color: #fffef3;
+	background-color: #fffdeb;
 }
 
 h1 {
@@ -30,4 +30,17 @@ br {
 	display: block;
 	margin: 10px 0;
 	content: " ";
+}
+
+a {
+	transition: 1s;
+	padding: 2px;
+
+}
+
+a:hover{ 
+	color: white;
+	background-color: darkblue;
+	text-decoration: none;
+	border-radius:8px;
 }
