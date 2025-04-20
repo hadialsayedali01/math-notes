@@ -29,7 +29,7 @@ window.MathJax = {
 	</p><p>
 	The set of natural numbers is $\mathbb{N}=\{1,2,3,...\}.$
 	</p><p>
-	The set of natural numbers is a subset</strong> of the set of integers. This can be represented in several ways: 
+	The set of natural numbers is a <i>subset</i> of the set of integers. This can be represented in several ways: 
 	<ul>
 		<li> \(\mathbb{N}\subset\mathbb{Z}\) </li>
 		<li> \(x\in\mathbb{N}\implies x\in\mathbb{Z}\) </li>
@@ -310,6 +310,113 @@ $$\begin{aligned}
 16 &= 8\times 2 + 0\\ 
 \end{aligned}$$
 Therefore, we claim that $gcd(1180, 482)=2$.
-  
+</ul>
+</p><p>
+
+Now we will focus on formally proving that the last remainder in this sequence is the $gcd$ of $m$ and $n$. 
+</p><p>
+<b>Proposition:</b> The natural number $r_{n}$ is the greatest common divisor of $m$ and $n$, as defined previously.
+<ul>
+<li>
+<b>
+Proof: 
+</b>
+Start by observing the sequence's last two formulas:
+$$
+\begin{aligned}
+&\vdots\\
+&r_{n-3}=q_{k-1}r_{n-2}+r_{n-1}\\
+&r_{n-2}=q_{k}r_{n-1}+r_{n}\\
+\end{aligned}
+$$
+Given a pair of dividend and divisor $(r_{n-2},r_{n-1})$, we can determine the next sequence's dividend & divisor pair $(r_{n-1}, r_{n})$ by multiplying the first pair by a specialized matrix:
+$$
+\begin{bmatrix}
+0 & 1
+\\\
+1 & -q_{k}
+\end{bmatrix}
+$$
+Let's perform an operation to make sure that multiplication with this matrix yields the next dividend and divisor pair.
+$$
+\begin{aligned}
+(r_{n-1}, r_{n})
+&=
+(r_{n-2},r_{n-1})
+\cdot
+\begin{bmatrix}
+0 & 1
+\\\
+1 & -q_{k}
+\end{bmatrix}
+\\
+(r_{n-1}, r_{n})
+&=
+(r_{n-2}\cdot 0 + r_{n-1}\cdot 1, r_{n-2}\cdot 1 - q_{k}r_{n-1})
+\\
+(r_{n-1}, r_{n})
+&=
+(r_{n-1}, r_{n-2} - q_{k}r_{n-1})
+\end{aligned}
+$$
+(We are using a liberal mesh of notations for vector and matrix multiplication.)
+<br>
+If you look back up to the two equations listed above, you'll find that the operation works.
+<br>
+Now let's define such a "quotient matrix" as $$Q_{k}=
+\begin{bmatrix}
+0 & 1
+\\\
+1 & -q_{k}
+\end{bmatrix}
+$$
+</li>
+where $k$ corresponds to the quotient index.
+<br>
+Since multiplying a dividend and divisor pair $(r_{i-2},r_{i-1})$ by such a matrix $Q_{i}$ yields the <i>next</i> dividend and divisor pair $(r_{i-1},r_{i})$, we can repeatedly multiply the initial dividend/divisor pair $(m,n)$ by this series of matrices until we get the last nonzero remainder in the dividend place. 
+<br>
+This expresses the division algorithm through matrix multiplication.
+$$
+\begin{aligned}
+(r_{n}, 0) &= (m,n)\cdot Q_{1}\cdots Q_{k}\\
+(r_{n}, 0) &= (m,n)\cdot Q,
+\end{aligned}$$
+where we set the repeated products of the $Q_{j}$ matrices to $Q$.
+<br>
+Now look at the implied value of $r_{n}$. 
+<br>
+$r_{n}=ma+nb$, where $(n,b)$ is the transpose of the first column of $Q$. $a$ and $b$ are products and sums of integers through repeated matrix multiplication, so they too are integers. 
+<br>
+Therefore, $r_{n}$ is an element of $I(m,n)$. 
+<br>
+Now we just need to show that $r_{n}$ divides both $m$ and $n$.
+<br>
+Consider the inverse of the matrix $Q$:
+$$
+\begin{aligned}
+Q_{k} &= Q_{1}\cdots Q_{k}\\
+\implies (Q^{-1})&=(Q_{1}\cdots Q_{k})^{-1}\\
+&=Q_{k}^{-1}\cdots Q_{1}^{-1}\\
+\end{aligned}
+$$
+Note that $Q_{j}^{-1} = 
+\begin{bmatrix}
+q_{k} & -1 \\\
+-1 & 0
+\end{bmatrix}
+$ for $j\in[1,k]$.
+<br> Through reasoning analogous to the above, 
+$$ 
+\begin{aligned}
+(m,n) &= (r_{n}, 0)\cdot Q^{-1}\\
+&= (r_{n}a, r_{n}b),\\
+\end{aligned} 
+$$
+where $(a,b)$ is the transpose of the first column of $Q$.
+<br>
+This statement implies the following:
+$$m=r_{n}a\implies r_{n} \mid m$$
+$$n=r_{n}b\implies r_{n} \mid n$$
+Therefore $r_{n}$ divides both $m$ and $n$. Since we also previously showed that $r_{n}\in I(m,n)$, by the previous proposition, $r_{n}$ is the greatest common divisor of $m$ and $n$.
 </body>
 </html>
