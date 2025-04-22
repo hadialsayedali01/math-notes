@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Math Notes</title>
+    <link rel="stylesheet" href="math.css">
+  <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+
+<script type="text/javascript" async
+  src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+<script type="text/javascript" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  </head>
+  <body>
+    <h1> Part 1: (Dividing) Integers </h1>
+    <h2> 1.0: Defining Integers </h2>
+    <p>
+	The set of integers is $\mathbb{Z}=\{...,-2,-1,0,1,2,...\}.$
+	</p><p>
+	The set of natural numbers is $\mathbb{N}=\{1,2,3,...\}.$
+	</p><p>
+	The set of natural numbers is a <i>subset</i> of the set of integers. This can be represented in several ways: 
+	<ul>
+		<li> \(\mathbb{N}\subset\mathbb{Z}\) </li>
+		<li> \(x\in\mathbb{N}\implies x\in\mathbb{Z}\) </li>
+		<li> For all \(x\in\mathbb{N}\), we have \(x\in\mathbb{Z}\)
+	</ul>
+	We can add and multiply numbers in both \(\mathbb{Z}\) and \(\mathbb{N}\). Note that subtraction is just adding a negative number.
+	</p><p>
+	Here are some properties of addition \((+)\) and multiplication \((\cdot)\) in \(\mathbb{Z}\) and \(\mathbb{N}\):
+	<ol>
+		<li> $\forall x,y\in\mathbb{Z}: x+y=y+x$ (commutativity) </li>
+		<li> $\forall x,y,z\in\mathbb{Z}: (x+y)+z=x+(y+z)$ (associativity) </li>
+		<li> $\forall x,y,z\in\mathbb{Z}: x\cdot(y+z)=x\cdot y+x\cdot z$ (distributivity)</li>
+	</ol>
+	</p><p>
+	<ul>
+	<li> Note: the first two of the above properties extend to multiplication; we show only the additive properties for brevity.</li>
+	<li>Note: again, for brevity, the three above properties are shown only in $\mathbb{Z}$, but they are true in $\mathbb{N}$ as well.</li>
+	</ul>
+	<p>
+	For many sets in mathematics, we have a concept of closure. For $\mathbb{N}$ and $\mathbb{Z}$, the operations addition and multiplication are closed under their respective sets.
+	</p><p>
+	For an example of closure, consider addition in $\mathbb{Z}$. When two numbers in this set, say $1$ and $2$, are added, we get $3$. This is also a number in $\mathbb{Z}$, since this set is closed under the addition operation. Similarly, if you multiply or add two numbers in $\mathbb{N}$, you get another number in $\mathbb{N}$.
+	</p><p>
+	There are some special identity numbers (more generally, identity elements) in $\mathbb{Z}$.
+	<ul>
+		<li><strong>The additive identity: </strong>$\forall x\in\mathbb{Z}\text{, }\exists\text{ 0}\in\mathbb{Z}: x+0=0+x=x$ (the sum of a number and 0 is just that number).
+		</li>
+		<li><strong>The multiplicative identity: </strong>$\forall x\in\mathbb{Z}\text{, }\exists\text{ 1}\in\mathbb{Z}: x\cdot1=1\cdot x=x$ (the product of a number and 1 is just that number).
+		</li>
+	</ul>
+	</p><p>
+	Note that since $0\notin\mathbb{N}$, this particular set has no additive identity. The multiplicative identity of $\mathbb{N}$ is $1$.
+	</p><p>
+	We will begin to omit the dot symbol ($\cdot$) when performing multiplication. We will instead use the convention that $ab$ means $a$ and $b$ are being multiplied.
+	</p><p>
+	We now establish the meaning of the unary absolute value operator: if $x\in\mathbb{Z}$, we define the absolute value of $x$ as 
+	$$|x| :=
+	 \begin{cases}
+	 x & \text{ if }x>0\\
+	 -x & \text{ if }x\leq 0
+	 \end{cases}$$
+With this definition, $|3|=3$ and $|-2|=2$, as we would expect.
+	</p><p>
+	Recall that the natural numbers $\mathbb{N}$ is closed under multiplication. This implies that the product of two positive numbers is positive.
+	<ul><li>We can further this inference: for integers $a,b$, we have $|ab|\geq\max(\{a,b\})$. The absolute value of the product of two integers is usually greater than the individual value of either of those two integers.</li></ul>
+	</p><p>
+	With these tools, we can move on to divisibility.</p>
+   <h2> 1.1: Divisibility of Integers </h2>
+   <p> We begin with the definition of divisibility.</p>
+	</p><p>
+	<strong>Definition of divisibility: </strong> Let $a,b\in\mathbb{Z}$. We say $a$ divides $b$ if there exists an integer $c$ such that $ac=b$.</p>
+	<ul>
+		<li> In other words, if $a$ divides $b$, then we can multiply $a$ by something to get $b$.</li>
+		<li> If $a$ divides $b$, we write $a|b$.</li>
+	</ul>
+	</p><p>
+		As an example of divisibility, consider integers $5$ and $10$. We say $5$ divides $10$, or $5|10$, since $5\cdot 2=10$.
+	</p><p>
+		We can now prove some statements about divsibility:
+	<ol>
+	<li> If $a|b$ and $b|a$, then $a=b$ or $a=-b$. </li>
+	<li> If $a|b$ and $b|c$, then $a|c$.</li>
+	<li> If $a|b$ and $a|c$, then $a$ divides all numbers of the form $bm + cn$, where $m$ and $n$ are integers.
+	</ol>
+	<ul><li>Note: the second statement describes the transitivity of divisibility. The third statement describes the ability of $a$ to divide all linear combinations of $b$ and $c$.</li></ul>
+	<strong>Proofs:</strong>
+	<ol>
+		<li>
+		From the assumptions, we have $a=bc$ and $b=ak$ for some integers $c,k$.<br>
+		Combine the above two equations. We get $a=bc=(ak)c$, so $a=a(kc)$. This implies that $kc=1$.<br>
+		$kc=1$ implies $k=c=1$ or $k=c=-1$. <br>If the former is true, $a=b$. If the latter is true, $a=-b$.
+	</li>	
+	<li>From the assumptions, we have $a=bm$ and $b=cn$ for some integers $m$ and $n$.<br>
+		Combine the above two equations. $a=bm=(cn)m$, so $a=c(nm)$. <br>
+		The last equation implies $a$ divides $c$.
+	</li>
+	<li> From the assumptions, we have $a=bm$ and $a=cn$ for some integers $m$ and $n$.<br>
+	$a$ can divide itself. $a|a$.<br>
+	$a$ can divide itself again. $a|2a$.<br>
+	From the first line of this proof, $a=bm=cn$, so $a+a=bm+cn=2a.$<br>
+	Since $a$ can divide $2a$, we also have $a$ can divide $bm+cn$.
+	</p>
+	</ol>
+	<p>
+	We now move to prime numbers.
+	</p>	
+	<h2> 1.2: Prime Numbers </h2>
+	<p> <Strong> Definition of prime number:</strong> a natural number $p$ is prime if it can be divided only by itself and 1.</p>
+	<ul>
+		<li>The set of prime numbers is a subset of the natural numbers.</li>
+		<li>The only even prime number is 2. All other even numbers are divisible by 2 and are hence not prime.</li>
+	</ul>
+	<p>
+	There is an important characteristic of natural numbers: <strong>every natural number greater than 1 can be written as a product of prime numbers.</strong>
+	<ul><li>This prime factorization is unique (independently of the order it presents the prime numbers in).</li>
+	<li>This means we can write, for all natural numbers $n$, $$n=p_{0}\cdot\cdot\cdot p_{k},$$ where each $p_{i}$ is a prime number.</li>
+	<li><strong>Proof (without uniqueness)</strong>: We do this proof by <a href="./Appendix.html">mathematical induction</a>. <br>The <u>base case</u> is done with the smallest prime number, $n=2$. Since $n=2$ is prime, we have trivially found a prime factorization for $2$ and proven the base case. 
+	<br>For the <u>induction step</u>, consider a natural number $m$. Assume that all natural numbers $n< m$ have a prime factorization (we are generalizing the base case).
+	<br>Given this assumption, we now prove that $m$ has a prime factorization. 
+	<br> We consider two cases: if $m$ is prime and if $m$ is not prime.
+	<br> If the former is true, then we have proven the statement trivially.
+	<br> If the latter is true, then $m$ can be written as $m=ab$ for $a,b$ natural numbers nonprime. 
+	<br> Both $a$ and $b$ must be less than $m$. Since we assumed all natural numbers less than $m$ have a prime factorization, $a$ and $b$ have respective prime factorizations:
+	$$a=a_{0}\cdot\cdot\cdot a_{k}\text{ and } b=b_{0}\cdot\cdot\cdot b_{j},$$
+	where all $a_{i}$ and $b_{j}$ are prime numbers. Now we can write
+	$$ m = ab = (a_{0}\cdot\cdot\cdot a_{k})(b=b_{0}\cdot\cdot\cdot b_{j}),$$
+	which is a prime factorization for $m$.
+</ul>
+	</p>
+<p>
+Another important theorem about prime numbers follows.
+</p><p>
+<strong>There are infinitely many prime numbers.</strong>
+<ul><li><strong>Proof:</strong> for this proof, we make use of our previously proven statement that every natural number can be expressed as a product of prime numbers.
+<br>
+Let $x$ be a natural number. $x$ is a product of prime numbers; write this prime factorization as 
+$$x=p_{0}\cdot\cdot\cdot p_{k}.$$
+We have shown that there are at least $k$-many prime numbers. The set of these known prime numbers is $\{p_{1},\dotsc, p_{k}\}$.
+<br>
+Let $y$ be a natural number where $y=x+1$. We can write
+$$y=x+1=p_{0}\cdot\cdot\cdot p_{k}+1.$$
+Note that $y$ is not divisible by any of the $p_{i}$ in $x$'s prime factorization. 
+<br>
+But $y$ is a natural number, so it must have its own prime factorization; this factorization must exclude the $p_{i}$ in $x$'s factorization.
+<br>
+Therefore, there must exist another, distinct prime number to allow $y$ to have its own factorization. Call this prime number $p$. 
+<br>
+Now we know there are at least $k+1$ prime numbers, and the set of these known prime numbers is $\{p_{1}\dotsc p_{k},p\}.$
+Therefore, there are infinitely many prime numbers (the idea is that we can repeat this type of proof for all natural numbers).
+</ul>
+</p><p>
+<h2> 1.3: Building Theories of Divison </h2>
+<p> You might already know that if you divide one number by another, you might be left with a remainder. 
+</p><p>
+For example, $13$ divided by $5$ is $2$ with remainder $3$, because $5\cdot 2$ gets us "as close as possible" to $13$ with multiples of $5$, albeit with $3$ remaining.
+</p><p> 
+Our goal now is to formalize this logic. We start with the following proposition.
+</p><p> 
+<strong>For integers $a$ and $d$, there exist unique integers $q$ and $s$ such that </strong>$$a=qd+r\text{, and }$$ $$0 \leq r < d.$$
+<ul>
+<li> This statement helps formalize the divison/remainder logic mentioned above. $a$ is the number to be divided, $d$ is the divisor, $q$ is the quotient, and $r$ is the remainder.</li>
+<li> Note that the inequality restricts the statement so that we have only one possible set of such values $\{q,s\}$. </li>
+</ul>
+To prove the statement fully, we need to prove the <i>existence</i> of $q$ and $s$ as well as their <i>uniqueness</i>. 
+</p><p>
+<b>Proof:</b>
+</p><p>
+<ul>
+<li><b>Existence:</b> Split this into two cases, $d\mid a$ and $d\nmid a $. For the first case, if $d\mid a$, then by the definiton of divisibility, there exists an integer $q$ such that $a=qd$ (we set $r=0$). 
+<br>We approach the second case, $d\nmid a$, with inductive reasoning. To do so, we split this case into two subcases, $a>0$ and $a<0$. For the first subcase $a>0$, the base case is $a=1$, and we have $d\geq a$. 
+We get $a=qd+r$ by setting $q=0$ and $r=a$. 
+<br>
+With the base case out of the way, we write our induction hypothesis: that for an integer $a>0$, for all integers $a' < a$, there exist $q'$ and $r'$ such that $a'=q'd+r'$.
+<br>
+In particular, we have an $a'=a-d$ and $q'=q-1$. We know to use induction in this way because of the benefit of hindsight; we know that, for example, $a=15$ and $d=7$,
+$$ \begin{aligned} 
+15 &= 2\cdot 7 + 1,\text{ and}\\
+15-7=8&=1\cdot 7 + 1. 
+\end{aligned} $$
+Our induction hypothesis is generalizing the relationship between these two equations.
+<br>
+We now have 
+$$\begin{aligned}
+a'&=q'd+r'\\
+a-d&=(q-1)d+r'\\
+a&=qd+r'\\
+a&=qd+r\text{, if we set $r'=r$}.\\
+\end{aligned}$$
+This completes the subcase where $a>0$.
+<br>
+For the subcase $a<0$, we proceed analogously with opposite sign. The base case is $a=-1$, and we fix $q=0$ and $r=a$. The induction hypothesis is that for some $a<0$, for all $0>a'>a$, we have the desired $q'$ and $r'$. This is true in particular for $a'=a+d$, which gives way to $q'=q+1$ and $r=r'$. 
+<br>
+To show that this particular case induces the desired statement,
+$$\begin{aligned}
+a'&=q'd + r'\\
+a+d&=(q+1)d + r\\
+a&=qd+r.\\
+\end{aligned}$$
+<i> Note: we proved the existence statement for $a<0$ and $a>0$, but not explicitly for $a=0$. However, the case where $a=0$ is implicitly proven somewhere in the above proof. Can you find it? Hint: you don't have to look very far.</i>
+<li><b>Uniqueness:</b> to show that the integers ($q,r$) described in the statement are unique to each pair $(a,d)$, we assume that there is some other pair $(q',r')$ that satisfies the statement for $(a,d)$ and prove that $q=q'$ and $r=r'$. 
+<br>
+That is, assume the following: 
+$$a=qd+r\text{, and}$$
+$$a=q'd+r'.$$
+Combine the equations:
+$$\begin{aligned}
+qd+r&=q'd+r'\\
+d(q-q')&=r'-r\\
+\end{aligned}$$
+If $q=q'$, we have $r'-r=0\implies r'=r$.
+<br>
+If $q\neq q'$, without loss of generality, assume that $q>q'$. Then we have the inequalities $$r'-r=d(q-q')\geq d\text{, so}$$
+$$r'-r\geq d \implies r' \geq d + r \geq d $$
+The last inequality shows that $r'\geq d$, which contradicts our statement's assumption that $d>r'$. 
+<br>
+Therefore, we cannot have $q\neq q'$. It must be that $q=q'$ and $r=r'$, and hence integers $r$ and $q$ are unique for each $a$ and $d$.
+</ul>
+<b>Definition of <i>greatest common divisor</i></b>: an integer $d$ is the <i>greatest common divisor</i> of integers $x$ and $y$ if the following properties are satisfied:
+<ul><li> $d$ divides $a$ and $b$ </li>
+<li> if an integer $c$ divides $a$ and $b$, then $c$ divides $d$
+</ul>
+For the upcoming few statements about greatest common divisors and to prove a division algorithm exists, we will need to use the following set:
+$$I(m,n) := \{am+bn : a,b\in\mathbb{Z}\}$$
+This is the set of all linear combinations of $a$ and $b$.
+</p><p>
+$I(m,n)$ has a few noteable properties:
+<ol>
+<li> For all $x,y\in I(m,n)\text{, }x+y\in I(m,n)\text{ and}-x\in I(m,n)$</li> 
+<li> For all integers $x$, we have $x I(m,n) \subseteq I(m,n)$</li>
+<li> If $b$ divides $m$ and $n$, then $b$ divides all elements of $I(m,n)$
+</ol>
+<b>Proofs</b>
+<ol>
+<li> 
+For the first part:
+$$\begin{aligned}
+&x\in I(m,n) \implies x=am + bn\text{ for some }a,b\in \mathbb{Z}\\
+&y\in I(m,n) \implies y=a'm + b'n\text{ for some }a',b'\in \mathbb{Z}\\
+&\implies x+y=(a+a')m + (b+b')n \in I(m,n)
+\end{aligned}$$
+For the second part:
+$$\begin{aligned}
+&x\in I(m,n) \implies x=am + bn\text{ for some }a,b\in \mathbb{Z}\\
+&\implies -x=(-a)m+(-b)n\in I(m,n)\\
+\end{aligned}$$
+  </body>
+</li>
+<li>
+Let $a=cm+kn$ be some element in $I(m,n)$.
+$$xa=(xc)m+(xk)n \in I(m,n).$$
+</li>
+<li>
+We can prove this trivially. Recall that if $b\mid m$ and $b\mid n$, then $b \mid am + bn$ for all $a,b\in\mathbb{Z}$. These are exactly the elements of $I(m,n)$.
+</li>
+</ol>
+</p><p>
+We have one more trivial observation before defining an algorithm for finding a greatest common divisor. If a natural number $d$ divides both $m$ and $n$ and $d\in I(m,n)$, then $gcd(m,n)=d$. 
+</p><p>
+<b>Algorithm for finding greatest common divisor</b>
+<ul>
+<li>Say we want to find the greatest common divisor of two natural numbers $a$ and $b$. 
+<li>We know there exist unique integers $q$ and $s$ such that $a=qb+r$, with $0\leq r < d$. This represents the division of $a$ by $b$ with a remainder and a quotient.
+<li>From the above formula, we can define the following formulas by setting the remainder of one formula as the divisor of the next, and the divisor of one formula as the dividend of the next. 
+<li>Each "new" remainder and quotient are the unknowns in each successive formula, and in practice, they are what we're meant to find. 
+<li>If you find the indices tricky, don't worry, as the examples that proceed will make this algorithm clearer.
+$$\begin{aligned}
+a&=qb+r\\
+b&=q_{1}r+r_{1}\\
+r&=q_{2}r_{1}+r_{2}\\
+r_{1}&=q_{3}r_{2}+r_{3}\\
+r_{2}&=q_{4}r_{3}+r_{4}\\
+&\vdots\\
+&\text{and so on...}\\
+&\vdots\\
+&\text{...until the remainder (rightmost value) is 0}\\
+&\vdots\\
+r_{n-2} &= q_{n-1}r_{n-1}+r_{n}\\
+r_{n-1} &= q_{n}r_{n}+0\\
+\end{aligned}\\$$
+Our now claim that the greatest common divisor of $a$ and $b$ is $r_{n}$, the last nonzero remainder.
+<li> Before we begin to prove this claim, here's an example of the algorithm in practice. Say we want to find the greatest common divisor of $45$ and $10$. 
+<br>
+<center><i>$45$ divided by $10$ is $4$ with remainder $5$</i></center>
+$$45=4\times 10 + 5$$
+<center><i>Replace the dividend with the divisor, and the divisor with the remainder</i></center>
+<br>
+<center><i>$10$ divided by $5$ is ? with remainder ?</i></center>
+<br>
+<center><i>$10$ divided by $5$ is $2$ with remainder $0$</i></center>
+$$10=2\times 5 + 0$$
+We have our zero remainder. Now we look up one formula from the last and see what the last nonzero remainder was. It's $5$, so we claim $gcd(45,10)=5$ (we still haven't formally proven that this algorithm yields the $gcd$.
+<li>Here's another, longer example. Say we want to find $gcd(1180, 482)$. Following the algorithm, we have 
+$$\begin{aligned}
+1180 &= 2\times 482 + 216\\
+482 &= 2\times 216 + 50\\ 
+216&= 4\times 50+ 16\\ 
+50 &= 3\times 16 + 2\\
+16 &= 8\times 2 + 0\\ 
+\end{aligned}$$
+Therefore, we claim that $gcd(1180, 482)=2$.
+</ul>
+</p><p>
+
+Now we will focus on formally proving that the last remainder in this sequence is the $gcd$ of $m$ and $n$. 
+</p><p>
+<b>Proposition:</b> The natural number $r_{n}$ is the greatest common divisor of $m$ and $n$, as defined previously.
+<ul>
+<li>
+<b>
+Proof: 
+</b>
+Start by observing the sequence's last two formulas:
+$$
+\begin{aligned}
+&\vdots\\
+&r_{n-3}=q_{k-1}r_{n-2}+r_{n-1}\\
+&r_{n-2}=q_{k}r_{n-1}+r_{n}\\
+\end{aligned}
+$$
+Given a pair of dividend and divisor $(r_{n-2},r_{n-1})$, we can determine the next sequence's dividend & divisor pair $(r_{n-1}, r_{n})$ by multiplying the first pair by a specialized matrix:
+$$
+\begin{bmatrix}
+0 & 1
+\\\
+1 & -q_{k}
+\end{bmatrix}
+$$
+Let's perform an operation to make sure that multiplication with this matrix yields the next dividend and divisor pair.
+$$
+\begin{aligned}
+(r_{n-1}, r_{n})
+&=
+(r_{n-2},r_{n-1})
+\cdot
+\begin{bmatrix}
+0 & 1
+\\\
+1 & -q_{k}
+\end{bmatrix}
+\\
+(r_{n-1}, r_{n})
+&=
+(r_{n-2}\cdot 0 + r_{n-1}\cdot 1, r_{n-2}\cdot 1 - q_{k}r_{n-1})
+\\
+(r_{n-1}, r_{n})
+&=
+(r_{n-1}, r_{n-2} - q_{k}r_{n-1})
+\end{aligned}
+$$
+(We are using a liberal mesh of notations for vector and matrix multiplication.)
+<br>
+If you look back up to the two equations listed above, you'll find that the operation works.
+<br>
+Now let's define such a "quotient matrix" as $$Q_{k}=
+\begin{bmatrix}
+0 & 1
+\\\
+1 & -q_{k}
+\end{bmatrix}
+$$
+</li>
+where $k$ corresponds to the quotient index.
+<br>
+Since multiplying a dividend and divisor pair $(r_{i-2},r_{i-1})$ by such a matrix $Q_{i}$ yields the <i>next</i> dividend and divisor pair $(r_{i-1},r_{i})$, we can repeatedly multiply the initial dividend/divisor pair $(m,n)$ by this series of matrices until we get the last nonzero remainder in the dividend place. 
+<br>
+This expresses the division algorithm through matrix multiplication.
+$$
+\begin{aligned}
+(r_{n}, 0) &= (m,n)\cdot Q_{1}\cdots Q_{k}\\
+(r_{n}, 0) &= (m,n)\cdot Q,
+\end{aligned}$$
+where we set the repeated products of the $Q_{j}$ matrices to $Q$.
+<br>
+Now look at the implied value of $r_{n}$. 
+<br>
+$r_{n}=ma+nb$, where $(n,b)$ is the transpose of the first column of $Q$. $a$ and $b$ are products and sums of integers through repeated matrix multiplication, so they too are integers. 
+<br>
+Therefore, $r_{n}$ is an element of $I(m,n)$. 
+<br>
+Now we just need to show that $r_{n}$ divides both $m$ and $n$.
+<br>
+Consider the inverse of the matrix $Q$:
+$$
+\begin{aligned}
+Q_{k} &= Q_{1}\cdots Q_{k}\\
+\implies (Q^{-1})&=(Q_{1}\cdots Q_{k})^{-1}\\
+&=Q_{k}^{-1}\cdots Q_{1}^{-1}\\
+\end{aligned}
+$$
+Note that $Q_{j}^{-1} = 
+\begin{bmatrix}
+q_{k} & -1 \\\
+-1 & 0
+\end{bmatrix}
+$ for $j\in[1,k]$.
+<br> Through reasoning analogous to the above, 
+$$
+\begin{aligned}
+(m,n) &= (r_{n}, 0)\cdot Q^{-1}\\
+&= (r_{n}a, r_{n}b),\\
+\end{aligned} 
+$$
+where $(a,b)$ is the transpose of the first column of $Q$.
+<br>
+This statement implies the following:
+$$m=r_{n}a\implies r_{n} \mid m$$
+$$n=r_{n}b\implies r_{n} \mid n$$
+Therefore $r_{n}$ divides both $m$ and $n$. Since we also previously showed that $r_{n}\in I(m,n)$, then by the previous proposition, $r_{n}$ is the greatest common divisor of $m$ and $n$.
+</ul>
+
+There's a corollary of the above proposition that has some useful insights.
+<br>
+<b>Corollary</b>: let $m$ and $n$ be integers nonzero. Let $d=\gcd(m,n)$. Then 
+$$
+\begin{aligned}
+\text{(i) } &d \text{ is the smallest element of } \mathbb{N} \cap I(m,n) \text{ (i.e., the set of positive elements of $I(m,n)$)}\\
+\text{(ii) }&I(m,n) = \mathbb{Z}d = \{-d, 0, d, 2d, 3d, ...\} \text{ (the integer multiples of $d$)}\\
+\end{aligned}
+$$
+<ul>
+<b>Proof:</b>
+<br> <b>(i)</b> In the proof that followed the division algorithm, we showed that $d \in I(m,n)$. Now we show that it's the smallest element of this set. 
+<br>
+Let $x \in I(m,n)$. Recall that $d$ divides all elements in $I(m,n)$. This includes $x$, so $x \geq d$. 
+<br>
+<b>(ii)</b> First we show $I(m,n) \subseteq \mathbb{Z}d$. 
+<br>Let $x=am+bn\in I(m,n)$. 
+<br>
+Since $d$ divides all elements of $I(m,n)$, $d$ divides $x$, so $d=xC$ for some integer $C$. This is an integer multiple of $d$. 
+<br>Therefore $I(m,n) \subseteq \mathbb{Z}d$.
+<br>
+Now we show $\mathbb{Z}d \subseteq I(m,n)$. Since $d$ itself is an element of $I(m,n)$, we can write $d=am+bn$ for some integers $a,b$.
+<br>
+Multiply the equation by an integer constant $C$. $dC = m(aC) + b(nC)$. This is an integer multiple of $d$ and is still an element of $I(m,n)$.
+<br>
+Therefore $\mathbb{Z}d \subseteq I(m,n)$ and the proof is complete.
+</ul>
+<b>Definition of "relatively prime"</b>: two nonzero integers $m$ and $n$ are relatively prime if $\gcd(m,n)=1$.
+<br>
+<b>Corollary</b>: $m$ and $n$ are relatively prime integers $\iff$ $1=ms+nt$ for some integers $s$ and $t$.
+<ul>
+<b>Proof</b>: 
+<br>
+(Part $\implies$): This proceeds directly from the definition of relatively prime integers.
+<br>
+(Part $\impliedby$): $1=ms+nt\in I(m,n)$ proceeds directly from the definition of $I(m,n)$. Additionally, $1$ divides both $m$ and $n$. Therefore $1=\gcd(m,n)$.
+</ul>
+<b>Corollary</b>: Let $a$ and $b$ be relatively prime integers. Say that $a\mid x$ and $b \mid x$ for some integer $x$. Then $ab\mid x$.
+<ul>
+<b>Proof</b>: 
+<br>Since $a$ and $b$ are relatively prime, $\gcd(a,b)=1=ac+bk$ for some $c,k$ integers.
+<br>Since $a\mid x$, we have $a\alpha=x$ for some integer $\alpha$. Likewise, $b\beta=x$ for some integer $\beta$.
+<br>
+Multiply the first equation by $x$ to get $x=a(cx)+b(kx)$. Now substitute the other two equations into this one and factor out $ab$ to get 
+$$x=ab(c\beta + a\alpha)$$
+Therefore $ab\mid x$.
+</ul>
+</body>
+</html>
