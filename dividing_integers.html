@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Math Notes</title>
+    <title>Part 1: (Dividing) Integers</title>
     <link rel="stylesheet" href="math.css">
   <script>
 window.MathJax = {
@@ -31,7 +31,7 @@ window.MathJax = {
 	</p><p>
 	The set of natural numbers is a <i>subset</i> of the set of integers. This can be represented in several ways: 
 	<ul>
-		<li> \(\mathbb{N}\subset\mathbb{Z}\) </li>
+		<li> \(\mathbb{N}\subseteq\mathbb{Z}\) </li>
 		<li> \(x\in\mathbb{N}\implies x\in\mathbb{Z}\) </li>
 		<li> For all \(x\in\mathbb{N}\), we have \(x\in\mathbb{Z}\)
 	</ul>
@@ -438,12 +438,12 @@ Let $x \in I(m,n)$. Recall that $d$ divides all elements in $I(m,n)$. This inclu
 <b>(ii)</b> First we show $I(m,n) \subseteq \mathbb{Z}d$. 
 <br>Let $x=am+bn\in I(m,n)$. 
 <br>
-Since $d$ divides all elements of $I(m,n)$, $d$ divides $x$, so $d=xC$ for some integer $C$. This is an integer multiple of $d$. 
+Since $d$ divides all elements of $I(m,n)$, $d$ divides $x$, so $dC=x$ for some integer $C$. This is an integer multiple of $d$. 
 <br>Therefore $I(m,n) \subseteq \mathbb{Z}d$.
 <br>
 Now we show $\mathbb{Z}d \subseteq I(m,n)$. Since $d$ itself is an element of $I(m,n)$, we can write $d=am+bn$ for some integers $a,b$.
 <br>
-Multiply the equation by an integer constant $C$. $dC = m(aC) + b(nC)$. This is an integer multiple of $d$ and is still an element of $I(m,n)$.
+Multiply the equation by an integer constant $C$. $dC = m(aC) + n(bC)$. This is an integer multiple of $d$ and is still an element of $I(m,n)$.
 <br>
 Therefore $\mathbb{Z}d \subseteq I(m,n)$ and the proof is complete.
 </ul>
@@ -467,5 +467,95 @@ Multiply the first equation by $x$ to get $x=a(cx)+b(kx)$. Now substitute the ot
 $$x=ab(c\beta + a\alpha)$$
 Therefore $ab\mid x$.
 </ul>
+<b>Proposition:</b> Let $p$ be a prime number and $a$ a nonzero integer. Then  $$p\mid a \text{ ,  or }$$ $$\gcd(p,a)=1$$
+<ul>
+<b>Proof:</b>
+<br>
+Assume $p \not\mid a$. 
+<br>
+If $a\neq 1$, we must have $a\not\mid p$, since $p$ is prime.
+<br>
+Since $a\not\mid p$ and $p\not\mid a$, we must have $\gcd(p,a)=1$.
+<br>
+If $a=1$, then we immediately the same result: $\gcd(p,a)=1$. 
+</ul>
+<b>Proposition</b>: Let $p$ be a prime number and $a,b$ nonzero integers such that $p\mid ab$. Then $p\mid a$ or $p\mid b$.
+<ul>
+<b>Proof</b>: 
+<br>
+Since $p\mid ab$, we have $px=ab$ for some integer $x$. 
+<br>
+Consider $p$ and $a$. By the previous proposition, either $p\mid a$ or $\gcd(p,a)=1$.
+<br>
+Without loss of generality, assume the latter case. We have $\gcd(p,a)=1=pC_{1}+aC_{2}$.
+<br>
+Multiply this equation by $b$ to get $b=p(bC_{1}) + (ab)C_{2}$.
+<br>
+Use the first equation mentioned in this proof to replace $ab$ on the rightmost expression and factor $p$: 
+$$b=p(bC_{1})+(pk)C_{2}=p(bC_{1})+p(kC_{2})=p(bC_{1}+pkC_{2})$$
+By comparing the leftmost expression with the rightmost expression, we see that $p\mid b$. This completes the proof.
+</ul>
+The following corollary is an extension of the previous proposition to more than two integers. 
+<br>
+<b>Corollary</b>: Let $p$ be a prime number that divides a product of nonzero integers $a_{1}\cdots a_{k}$. Then $p$ divides one of the $a_{i}$ in this product.
+<ul>
+<b>Proof</b>: with the previous proposition, this proof is almost trivial. 
+<br>
+Write 
+$$
+\begin{aligned}
+&a_{1}\cdots a_{k}\\
+=&(a_{1}\cdots a_{k-1}) a_{k}\\
+\end{aligned}
+$$
+By the previous proposition, $p$ must divide either $(a_{1}\cdots a_{k-1})$ or $a_{k}$. 
+<br>
+If $p$ divides the latter, we're done. If not, we drop $a_{k}$ from the expression and keep testing integers in the exact same way:
+$$
+\begin{aligned}
+&a_{1}\cdots a_{k-1}\\
+=&(a_{1}\cdots a_{k-2}) a_{k-1}\\
+&\text{ $p$ must divide $a_{k-1}$ or $a_{1}\cdots a_{k-2}$}\\
+&\text{ If $a_{k-1}$, we're done. Else, drop $a_{k-1}$ and continue...}\\
+\vdots \\
+\end{aligned}
+$$
+Continue this process until $p$ divides one of the singular $a_{i}$. By the previous proposition, the result is inevitable; we can keep splitting the product into two and $p$ will always divide one of the halves.
+</ul>
+
+Now we finally have enough tools to prove the uniqueness of natural numbers' prime factorizations. At the beginning of chapter 1.2: Prime Numbers, we showed only the "existence" part of this proof.
+<br>
+<b> Theorem</b>: The prime factorization of a natural number (greater than $1$) is unique, up to order.
+<ul>
+<b>Proof</b>: 
+<br>We make use of inductive reasoning. The base case is done with $2$. Since $2$ itself is a prime number, it represents its own unique prime factorization. This settles the base case.
+<br>Induction hypothesis: for a natural number $n$, assume that all natural numbers $m < n$ have unique prime factorizations.
+<br>With this hypothesis, we want to show that the prime factorization of $n$ is unique as well.
+<br>
+Say $n$ has two prime factorizations:
+$$n=p_{1}\cdots p_{r}$$
+$$n=q_{1}\cdots q_{s}$$
+We need to establish an ordering of these prime factorizations so that we can compare them rigourously. For each factorization, assume the following:
+$$p_{1} \leq p_{2} \leq \cdots \leq p_{r}$$
+$$q_{1} \leq q_{2} \leq \cdots \leq q_{s}$$
+In other words, each prime factorization presents its prime numbers in (nonstrictly) ascending order.
+<br>
+Assume, without loss of generality, that $p_{1}\leq q_{1}$ (we explicitly state that if the two numbers are unequal, $p_{1}$ should be less than $q_{1}$). If you don't understand why we make this assumption, look to the next few steps of this proof and go back to this assumption.
+<br>
+Note the following:
+$$n=p_{1}(p_{2}\cdots p_{r}) = q_{1}\cdots q_{s}$$
+This shows that $p_{1} \mid q_{1}\cdots q_{s}$. By the previous proposition, this implies that $p_{1}$ divides one of the $q_{i}$. 
+<br>Since this $q_{i}$ is prime, we must have $p_{1}=q_{i}$ (a prime number can be divided only by itself and $1$). 
+<br>
+Since $p_{1} \leq q_{1} \leq q_{i}$ for all $i$, we must have that $p_{1}=q_{1}$ (i.e., the $q_{i}$ we were talking about was $q_{1}$ all along). Some other equalities with $p$ might exist, but this is the one we defintively know exists.
+<br>
+We have proven equality for the first terms in each prime factorization. Now divide each factorization of $n$ by these terms:
+$$n/p_{1}=p_{2}\cdots p_{r}$$
+$$n/q_{1}=q_{2}\cdots q_{s}$$
+Both of these values are less than $n$, so by our induction hypothesis, their prime factorizations are unique. This completes the proof.
+</ul>
+
+
+
 </body>
 </html>
