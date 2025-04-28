@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Part 1: (Dividing) Integers</title>
+    <link rel="stylesheet" href="math.css">
+  <script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']]
+  }
+};
+</script>
+
+<script type="text/javascript" async
+  src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+<script type="text/javascript" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  </head>
+  <body>
+    <h1> Part 2: Modular Arithmetic </h1>
+    <h2> 2.0: Analogies </h2>
+<p>
+Consider an analog clock with two hands and no indication whether it's AM or PM. If the time was 23:00, or 11:00PM, the clock's hands would be in the same place if it were 11:00AM. This is because 23 and 11 are congruent numbers on the 12-hour analog clock; they represent the same number under "modulo 12." 
+</p><p>
+Here's another analogy. Say you have ten fingers on your hands and you want to count to 3. You would hold up three fingers. If you want to count to 13, you might count through all your fingers, then drop all of them, and then hold up three fingers. Counting to 3 and to 13 both result in you holding up three fingers. This is because 3 and 13 are congruent numbers on a 10-digit hand; 3 and 13 represent the same number under "modulo 10." 
+</p>
+<p>
+To find all the numbers that are congruent to 3 under modulo 10, you could use the expression $10k + 3$, where $k$ is an integer. This is any multiple of 10 shifted by 3. All numbers of the form $10k+3$ represent the same number as 3 on a 10-digit hand. 
+</p></p>
+We formalize and further examine this logic in the following sections.
+<p>
+<h2> 2.1: Congruence, Congruence Classes </h2>
+<b>Definition of congruence</b>: let $n$ be a natural number and $a,b$ integers. $a$ is congruent to $b$ modulo $n$ if $n$ divides $a-b$, and we write $a\equiv b \mod n$.
+<ul><li>More concisely, $n\mid a-b \iff a\equiv b \mod n$.</ul>
+<p>
+<b>Lemma:</b> Congruence modulo $n$ has the following properties:
+<ul>
+<dl>
+<dd> (a) $a\equiv a \mod n$ (reflexivity) </dd>
+<dd> (b) $a\equiv b \mod n \iff b \equiv b \mod n$ (commutativity) </dd>
+<dd> (c) $a\equiv b \bmod n$ <i>and</i> $b\equiv c \bmod n \implies a \equiv c \mod n$ (transitivity) </dd>
+</dl>
+</ul>
+If you think about the analogies again, you might realize that there are a lot of numbers that are congruent to each other. 
+<br>
+<b>Definition of congruence class: </b>for modulo $n$ and a number $a$, we can define the congruence class of $a$ modulo $n$ as 
+$$
+\begin{aligned} 
+{[a]} &= \{b\in\mathbb{Z} \mid a\equiv b \mod n \}\\
+&=\{a+kn \mid k\in\mathbb{Z}\} \\
+\end{aligned}
+$$ 
+<ul>
+<li> If $x\in{[a]}$, then we say $x$ is a <i>representative</i> of ${[a]}$. 
+<li>3, 13, 26, and -7 are representatives of ${[3]}$ modulo 10.
+</ul>
+Additionally, within each congruence class, there's a representative that is the "natural form" of the number. This number has to nonnegative and less than $n$. In our clock example (modulo 12), this number would be 11, rather than 23 or 35. In our hand-digit-counting example (modulo 10), this number would be 3, rather than 13 or 23. 
+<br>In all congruence classes modulo $n$, the number in question is actually the remainder of any class representative following division by $n$. For the clock example, 23 and 35 are both part of the same congruence class; each divided by 12 yields 11 as remainder. 
+<br>
+<b> Definition of $\operatorname{rem}_{n}$:</b> given a natural number $n$ and an integer $a$, $\operatorname{rem}_n(a)=r$ represents the remainder after $n$ divides $a$.
+<ul>
+<li> $r\in\{0,\cdots, n-1\}$
+<li> $r$ is unique (this extends from the unique remainder value following division of two integers)
+</ul>
+<h2> 2.2: Properties of Congruence </h2>
+<b>Lemma</b>: the following statements are equivalent.
+<dd> (a) $a\equiv b\mod n$</dd>
+<dd> (b) ${[a]} = {[b]}$</dd>
+<dd> (c) $\operatorname{rem}_n(a)=\operatorname{rem}_n(b)$</dd>
+<dd> (d) ${[a]}\cap{[b]}\neq\emptyset$</dd>
+
+<ul><b>Proof:</b>
+We do this proof by showing that (a)$\implies$(b)$\implies$(c)$\implies$(d)$\implies$(a). Note that in each implication's proof, we can assume only the immediately preceding statement. 
+<br>
+For (a)$\implies$(b), recall that $a\equiv b \mod n \iff b\equiv a \mod n$. 
+Let $x\in\ {[a]}$, which implies $x\equiv a \mod n$. By the transitivity rule, we have $x\in\ {[b]}$. Therefore ${[a]}\subseteq {[b]}$. We show ${[b]}\subseteq {[a]}$ and thereby that ${[a]}={[b]}$ by making the same argument in the opposite direction.
+<br>
+For (b)$\implies$(c), the proof proceeds directly from the definition of $\operatorname{rem}_n(a)$ and the uniqueness of this value. The set $\{\operatorname{rem}_n(a)\}$ is a single-element restriction of the set ${[a]}={[b]}$, identified by its uniqueness and being smaller than $n$. This feels unsatisfying, so we'll do a more math-ey proof: 
+$$
+\begin{aligned}
+\operatorname{rem}_n(a) &= r \in {[a]}={[b]}\\
+\operatorname{rem}_n(b) &= r' \in {[b]}={[a]}\\
+\text{Since $r,r'$ unique in }{[a]}, r&=r'.\\
+\end{aligned}
+$$
+For (c)$\implies$(d), we know that $\operatorname{rem}_n(a)=\operatorname{rem}_n(b)=r \in{[a]}={[b]}$. Therefore $\{r\}\subseteq {[a]}\cap {[b]} \neq \emptyset$.
+</ul>
+We will use the notation $\mathbb{Z}_{n}$ to represent all the congruence classes $\{{[0]},\cdots,{[n-1]}\}$ modulo $n$. $\mathbb{Z}_{6}=\{{[0]},\cdots,{[5]}\}$, for example.
+<br>
+The next lemma shows how addition and multiplication works with congruences.
+<br>
+<b>Corollary:</b> let $a,a',b,b'\in\mathbb{Z}$, with $a=a' \mod n$ and $b=b'\mod n$. Then 
+$$a+b=a'+b'\mod n \text{, and }$$
+$$ab=a'b'\mod n$$
+<ul>
+<b>Proof:</b>
+<br>
+For addition, given the assumptions, 
+$$
+\begin{aligned}
+&n\mid a-a' \text{ and } n\mid b-b'\\
+\implies & nk=a-a' \text{ and } nc=b-b' \text{ for some c,k integers}\\
+\implies & n(k+c) = (a+b) - (a'+b') \\
+\implies & n\mid (a+b) - (a'+b') \\
+\implies & a+b \equiv a'+b' \mod n \\
+\end{aligned}
+$$
+For multiplication, given the assumptions,
+$$
+\begin{aligned}
+&n\mid a-a' \text{ and } n\mid b-b'\\
+\implies & nk=a-a' \text{ and } nc=b-b' \text{ for some c,k integers}\\
+\end{aligned}
+$$
+Using this,  
+$$
+\begin{aligned}
+ab-a'b' &= ab + a'b - a'b -a'b'\\
+&= b(a-a') + a'(b-b')\\
+&= b(nk) + a'(nc)\\
+&= n(bk + a'c)\\
+\implies & n\mid ab-a'b'\\
+\implies &ab \equiv a'b' \mod n
+\end{aligned}
+$$
+</ul>
+Now we define addition and multiplication in $\mathbb{Z}_{n}$; that is, addition and multiplication of elements such as ${[a]}$ and ${[b]}$ modulo $n$:<br>
+<center>
+<b>Addition: ${[a]}+{[b]}:={[a+b]}$
+</center>
+<br>
+<center>
+Multiplication: ${[a]}{[b]}:={[ab]}$
+</b>
+</center>
+<br>
+I like to include exponentiation for congruence sets too, for notation's sake (it's easier than writing a long multiplication set operation):
+<br>
+<center>
+<b>
+Exponentiation: ${[a]}^k:={[a^k]}$
+</b>
+</center>
+<br>
+Now we're ready to look at properties between congruence classes; that is, objects in $\mathbb{Z}_{n}$.
+<br>
+<b>Proposition:</b>
+<dd> (a) addition and multiplication in $\mathbb{Z}_n$ is commutative and associative </dd>
+<dd> (b) ${[0]}$ is the additive identity element </dd>
+<dd> (c) every element of $\mathbb{Z}_{n}$ has an additive inverse </dd>
+<dd> (d) ${[1]}$ is the multiplicative identity element </dd>
+<dd> (e) distribution of the multiplication operation over the addition operation holds </dd>
+<ul>
+<b>Proof:</b> 
+<br>The proof of all these statements propogate from the veracity of their integer forms, so we'll do only (b) and (c).
+<br>
+For (b), take ${[x]}\in\mathbb{Z}_{n}$. We have 
+$$ {[x]}+{[0]}={[x+0]}={[x]}$$
+For (c), take ${[x]},{[-x]}\in\mathbb{Z}_{n}$. We have
+$$ {[x]}+{[-x]}={[x-x]}={[0]}$$
+</ul>
+Note that unlike in $\mathbb{Z}$, products of nonzero elements of $\mathbb{Z}_{n}$ can be $0$. Take ${[2]},{[3]}\in\mathbb{Z}_{6}$. Then ${[2]}{[3]}={[2\times 3]}={[6]}={[0]}$. On the other hand, $2\times 3 = 6 \neq 0$.
+<br>
+We can now solve common problems that relate to modular arithmetic. 
+<br>
+<b>Problem: </b> $x\equiv 9^{100} \mod 4$. What is $x$, if $0\leq x < 4$?
+<ul>
+Since we're working in modulo $4$, $9^{100}$ can be simplified by looking at its congruences. First, look at the congruences of $9$ modulo $4$:
+$$
+{[9]}={[9-4]}={[5]}={[5-4]}={[1]}
+$$ 
+Therefore, $9^{100} \equiv 1^{100} \equiv 1 \mod 4$. So $x=1$.
+</ul>
+You might have noticed that we were secretly calculating $\operatorname{rem}_{4}(9^{100})$. 
+<br>
+<b>Problem: </b> $x\equiv 17^{81} \mod 6$. What is $x$, if $0\leq x < 6$?
+<ul>
+First note that $81=3\times 27=3\times 3\times 3\times 3\times 3$.
+<br>
+Note also that ${[17]}={[17-6\times 2]}={[5]}\implies {[17^{81}]}={[5^{81}]}$.
+Additionally, ${[5^3]=[125]=[125-6\times 20]=[5]}$.
+<br>
+This simplifies ${[17^{81}]}$ significantly:
+$${[17^{81}]}={[5^{81}]}={[5^{3\times 3\times 3\times 3}]=[5]}.$$
+Therefore, $x\equiv 17^{81} \mod 6 \implies x=5$.
+</ul>
+Now let's move on to a slightly harder problem. Say we want to find $x$ such that 
+$$
+\begin{aligned}
+x&\equiv \alpha \mod a \text{, and }\\
+x&\equiv \beta \mod b\\
+&(0\leq x < a,b)\\
+\end{aligned}
+$$
+How would we know that such an $x$ exists? The following theorem states the condition for the existence of such an $x$, and its proof provides an algorithm for finding $x$ (if it exists).
+<br>
+<b>Theorem (Chinese Remainder Theorem):</b> if $a,b\in\mathbb{N}$ are <i>relatively prime numbers</i>, then there exists an integer $x$ such that 
+$$
+\begin{aligned}
+x&\equiv \alpha \mod a \text{, and }\\
+x&\equiv \beta \mod b\\
+\end{aligned}
+$$
+for all $\alpha,\beta\in\mathbb{Z}$. Additionally, this $x$ is unique up to congruence modulo $ab$.
+<ul>
+<b>Proof:</b>
+<br>
+Since $a$ and $b$ are relatively prime, $\gcd(a,b)=1=as+bt$ for some integers $s,t$, so that 
+$$1-as=bt\implies b\mid (1-as) \implies as\equiv 1 \mod b$$
+and
+$$1-bt=as\implies a\mid (1-bt) \implies bt\equiv 1 \mod a$$
+Now set $x=\alpha (bt) + \beta (as)$. Verify that this $x$ satisfies both equations:
+$$x=\alpha (bt) + \beta (as) \equiv \alpha (1) + \beta (0) = \alpha \mod a$$
+and
+$$x=\alpha (bt) + \beta (as) \equiv \alpha (0) + \beta (1) = \alpha \mod b$$
+Note that the $as$ is congruent to $0$ under modulo $a$ because $as\equiv a \equiv 0 \mod a$. The same goes for congruence of $bt$ and $0$ modulo $b$. 
+<br>
+That was the "existence" part of the proof. Now we do uniqueness.
+<br>
+Let $y$ be another integer that satisfies both equations. By commutativity and transitivity of congruence, we have 
+$$x \equiv y \mod a$$ and $$x \equiv y \mod b$$
+By the definition of congruence, this means that 
+$$a\mid x-y \text{ and } b \mid x-y$$
+Since $a$ and $b$ are relatively prime and both divide $x-y$, then the product $ab$ divides $x-y$ as well; that is, $ab\mid x-y$. 
+<br>
+By the definition of congruence, this implies that $x\equiv y \mod ab$. This completes the "uniqueness" part of the proof.
+<br>
+</ul>
+Let's look at a simple problem involving the Chinese Remainder Theorem.
+<br>
+<b>Problem:</b> find $x$ such that 
+$$x\equiv 5 \mod 7$$
+$$x\equiv 4 \mod 8$$
+<ul>
+Does $x$ exist? $\gcd(7,8)=1$, so $x$ does exist.
+<br>
+Now set $\alpha=5$ and $\beta=4$. 
+<br>
+We have $1=7(-1) + 8(1)$.
+<br>
+Calculate $x$ according to the proof: 
+<br>
+$$
+\begin{aligned}
+x&=\alpha(8(1)) + \beta(7(-1))\\
+&=8\alpha - 7\beta \\
+&=12
+\end{aligned}
+$$
+Verify the solution. 
+<br>
+<br>
+<center>$7\mid 12-5$, so $12\equiv 5 \mod 7$.</center>
+<br>
+<center>$8\mid 12-4$, so $12\equiv 4 \mod 8$.</center>
+<br>
+<br>
+Final answer: $x=12$.
+</ul>
+</body>
+</html>
